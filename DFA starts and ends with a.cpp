@@ -1,39 +1,33 @@
 #include<stdio.h>
-#include<conio.h>
 #include<string.h>
-const int final_state=1;
-void main ()
+#define max 20
+int main()
 {
-	int trans_table[4][2]={{1,2},{1,3},{2,2},{1,3}};
-	char input_string[20],curr_input,i,l;
-	int present_state,next_state,valid_input;
-	printf("Enter the input string : ");
-	scanf("%s",input_string);
-	l=strlen(input_string);
-	present_state=0;
-	valid_input=1;
-	for(i=0;i<l;i++)
-	{
-		curr_input=input_string[i];
-		if(curr_input=='a')
-			next_state=trans_table[present_state][0];
-		else if(curr_input=='b')
-			next_state=trans_table[present_state][1];
-		else
-		{
-			valid_input=0;
-			break;
-		}
-		present_state=next_state;
-	}
-	if(valid_input==0)
-		printf("Invalid input\n");
-	else
-	{
-		if(present_state==final_state)
-			printf("The string %s is accepted\n",input_string);
-		else
-			printf("The string %s cannot be accepted\n",input_string);
-	}
-	getch();
+int trans_table[4][2]={{1,3},{1,2},{1,2},{3,3}};
+int final_state=2,i;
+int present_state=0;
+int next_state=0;
+int invalid=0;
+char input_string[max];
+printf("Enter a string:");
+scanf("%s",input_string);
+int l=strlen(input_string);
+for(i=0;i<l;i++)
+{
+if(input_string[i]=='a')
+next_state=trans_table[present_state][0];
+else if(input_string[i]=='b')
+next_state=trans_table[present_state][1];
+else
+invalid=l;
+present_state=next_state;
+}
+if(invalid==l)
+{
+printf("Invalid input");
+}
+else if(present_state==final_state)
+printf("Accept\n");
+else
+printf("Don't Accept\n");
 }
